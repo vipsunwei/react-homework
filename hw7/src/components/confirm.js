@@ -17,6 +17,12 @@ import './confirm.css'
 //   )
 // }
 class Confirm extends React.Component {
+  componentDidMount() {
+    this._mounted = true
+  }
+  componentWillUnmount() {
+    this._mounted = false
+  }
   render() {
     const { text } = this.props
 
@@ -34,8 +40,15 @@ export default function confirm(txt) {
     let node = document.createElement('div')
     document.body.appendChild(node)
     ReactDOM.render(<Confirm ref={confirmRef} text={txt} />, node, () => {
-      let res = ReactDOM.findDOMNode(confirmRef.current)
-      resolve(res)
+      // let res = ReactDOM.findDOMNode(confirmRef.current)
+
+      // console.log(confirmRef.current)
+      let isMounted = confirmRef.current._mounted
+      if (isMounted) {
+        resolve(true)
+      } else {
+        resolve(false)
+      }
     })
   })
 }
