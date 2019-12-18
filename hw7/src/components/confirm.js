@@ -44,11 +44,7 @@ export default function confirm(txt) {
 
       // console.log(confirmRef.current)
       let isMounted = confirmRef.current._mounted
-      if (isMounted) {
-        resolve(true)
-      } else {
-        resolve(false)
-      }
+      resolve(isMounted)
     })
   })
 }
